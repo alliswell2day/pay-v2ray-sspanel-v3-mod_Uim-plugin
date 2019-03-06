@@ -144,6 +144,15 @@ wget https://www.moerats.com/usr/shell/swap.sh && bash swap.sh
 
 ### [推荐] 脚本部署
 
+#### Docker-compose 安装 
+这里一直保持最新版
+~~~
+mkdir v2ray-agent  &&  \
+cd v2ray-agent && \
+curl https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install.sh -o install.sh && \
+chmod +x install.sh && \
+bash install.sh
+~~~
 #### 普通安装
 ##### 安装v2ray 
 修改了官方安装脚本
