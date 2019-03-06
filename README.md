@@ -2,6 +2,7 @@
 # 收费版本，暂定一个完整webapi地址 200
 ## 公告
 1. 限速功能完成，是收费版本(不在提供源码，只提供二进制文件，需要联系tg @ricobb 获取授权码)
+2. 自动配置tls 咕咕
 ## Thanks
 1. 感恩的 [ColetteContreras's repo](https://github.com/ColetteContreras/v2ray-ssrpanel-plugin). 让我一个go小白有了下手地。主要起始框架来源于这里
 2. 感恩 [eycorsican](https://github.com/eycorsican) 在v2ray-core [issue](https://github.com/v2ray/v2ray-core/issues/1514), 促成了go版本提上日程
@@ -143,17 +144,6 @@ wget https://www.moerats.com/usr/shell/swap.sh && bash swap.sh
 
 ### [推荐] 脚本部署
 
-#### Docker-compose 安装 
-这里一直保持最新版
-~~~
-mkdir v2ray-agent  &&  \
-cd v2ray-agent && \
-curl https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/install.sh -o install.sh && \
-chmod +x install.sh && \
-bash install.sh
-~~~
-
-
 #### 普通安装
 ##### 安装v2ray 
 修改了官方安装脚本
@@ -161,19 +151,19 @@ bash install.sh
 
 安装（这里保持最新版本）
 ~~~
-bash <(curl -L -s  https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh) --panelurl https://xxxx --panelkey xxxx --nodeid 21
+bash <(curl -L -s  https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh) --panelurl https://xxxx --panelkey xxxx --nodeid 21
 ~~~
 
 后续升级（如果要更新到最新版本）
 ~~~
-bash <(curl -L -s  https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh)
+bash <(curl -L -s  https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh)
 ~~~
 
 
 如果要强制安装某个版本
 
 ~~~
-bash <(curl -L -s  https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh) -f --version 4.12.0
+bash <(curl -L -s  https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh) -f --version 4.12.0
 ~~~
 
 
