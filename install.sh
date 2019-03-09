@@ -114,7 +114,7 @@ pre_install_docker_compose(){
     [ -z "${ssrpanel_url}" ]
     echo
     echo "---------------------------"
-    echo "ssrpanel_token = ${ssrpanel_url}"
+    echo "ssrpanel_url = ${ssrpanel_url}"
     echo "---------------------------"
     echo
     # Set ssrpanel key
