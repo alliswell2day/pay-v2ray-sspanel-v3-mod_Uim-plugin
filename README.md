@@ -1,5 +1,6 @@
 # v2ray-sspanel-v3-mod_Uim-plugin
 # 收费版本
+### 免费版 [请点击这里](https://github.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/edit/master/README.md)
 ## 公告
 1. 限速功能完成，是收费版本(不在提供源码，只提供二进制文件，需要联系使用[bot购买](https://t.me/Rico_V2_bot))
 2. 配合胖虎适配ssrpanel
