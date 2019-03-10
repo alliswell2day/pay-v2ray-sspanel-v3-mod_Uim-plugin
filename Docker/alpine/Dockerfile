@@ -2,7 +2,7 @@ FROM ubuntu:latest as builder
 
 LABEL maintainer="Rico <rico93@outlook.com>"
 
-ENV v2ray_version=4.18.0
+ENV v2ray_version=4.18.1
 
 RUN apt-get update
 RUN apt-get install curl -y
@@ -37,4 +37,5 @@ CMD     sed -i "s|\"port\": 2333,|\"port\": ${api_port},|"  "/etc/v2ray/config.j
         sed -i "s/\"55fUxDGFzH3n\"/\"${key}\"/g" "/etc/v2ray/config.json" && \
         sed -i "s/123456/${node_id}/g" "/etc/v2ray/config.json" && \
         sed -i "s/\"SpeedTestCheckRate\": 6/\"SpeedTestCheckRate\": ${speedtest}/g" "/etc/v2ray/config.json" && \
+        sed -i "s/\"downWithPanel\": 6/\"downWithPanel\": ${downWithPanel}/g" "/etc/v2ray/config.json" && \
         v2ray -config=/etc/v2ray/config.json
