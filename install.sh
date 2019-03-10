@@ -109,7 +109,7 @@ error_detect_depends(){
 # Pre-installation settings
 pre_install_docker_compose(){
     # Set ssrpanel_url
-    echo "Please ssrpanel_token"
+    echo "Please ssrpanel_url"
     read -p "(There is no default value please make sure you input the right thing):" ssrpanel_url
     [ -z "${ssrpanel_url}" ]
     echo
@@ -154,6 +154,16 @@ pre_install_docker_compose(){
     echo
     echo "---------------------------"
     echo "V2ray API Listen port = ${v2ray_api_port}"
+    echo "---------------------------"
+    echo
+
+    # Set Setting if the node go downwith panel
+    echo "Setting if the node go downwith panel"
+    read -p "(v2ray_downWithPanel (Default 1):" v2ray_downWithPanel
+    [ -z "${v2ray_downWithPanel}" ] && v2ray_downWithPanel=1
+    echo
+    echo "---------------------------"
+    echo "v2ray_downWithPanel = ${v2ray_downWithPanel}"
     echo "---------------------------"
     echo
 }
@@ -228,6 +238,7 @@ config_docker(){
     sed -i "s|key:.*|key: '${ssrpanel_key}'|"  ./docker-compose.yml
     sed -i "s|speedtest:.*|speedtest: ${ssrpanel_speedtest}|"  ./docker-compose.yml
     sed -i "s|api_port:.*|api_port: ${v2ray_api_port}|" ./docker-compose.yml
+    sed -i "s|downWithPanel:.*|downWithPanel: ${v2ray_downWithPanel}|" ./docker-compose.yml
 }
 
 
@@ -246,6 +257,7 @@ config_caddy_docker(){
     sed -i "s|key:.*|key: '${ssrpanel_key}'|"  ./docker-compose.yml
     sed -i "s|speedtest:.*|speedtest: ${ssrpanel_speedtest}|"  ./docker-compose.yml
     sed -i "s|api_port:.*|api_port: ${v2ray_api_port}|" ./docker-compose.yml
+    sed -i "s|downWithPanel:.*|downWithPanel: ${v2ray_downWithPanel}|" ./docker-compose.yml
     sed -i "s|V2RAY_DOMAIN=xxxx.com|V2RAY_DOMAIN=${v2ray_domain}|"  ./docker-compose.yml
     sed -i "s|V2RAY_PATH=/v2ray|V2RAY_PATH=${v2ray_path}|"  ./docker-compose.yml
     sed -i "s|V2RAY_EMAIL=xxxx@outlook.com|V2RAY_EMAIL=${v2ray_email}|"  ./docker-compose.yml
@@ -283,14 +295,15 @@ config_caddy_docker_cloudflare(){
     echo "install curl first "
     install_dependencies
     echo "Starting Writing Caddy file and docker-compose.yml"
-    curl -L https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/Caddyfile >Caddyfile
+    curl -L https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/Caddyfile >Caddyfile
     epcho "Writing docker-compose.yml"
-    curl -L https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/docker-compose.yml >docker-compose.yml
+    curl -L https://raw.githubusercontent.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/master/Docker/Caddy_V2ray/docker-compose.yml >docker-compose.yml
     sed -i "s|node_id:.*|node_id: ${ssrpanel_node_id}|"  ./docker-compose.yml
     sed -i "s|sspanel_url:.*|sspanel_url: '${ssrpanel_url}'|"  ./docker-compose.yml
     sed -i "s|key:.*|key: '${ssrpanel_key}'|"  ./docker-compose.yml
     sed -i "s|speedtest:.*|speedtest: ${ssrpanel_speedtest}|"  ./docker-compose.yml
     sed -i "s|api_port:.*|api_port: ${v2ray_api_port}|" ./docker-compose.yml
+    sed -i "s|downWithPanel:.*|downWithPanel: ${v2ray_downWithPanel}|" ./docker-compose.yml
     sed -i "s|V2RAY_DOMAIN=xxxx.com|V2RAY_DOMAIN=${v2ray_domain}|"  ./docker-compose.yml
     sed -i "s|V2RAY_PATH=/v2ray|V2RAY_PATH=${v2ray_path}|"  ./docker-compose.yml
     sed -i "s|V2RAY_EMAIL=xxxx@outlook.com|V2RAY_EMAIL=${v2ray_email}|"  ./docker-compose.yml
@@ -384,6 +397,10 @@ install_dependencies(){
             error_detect_depends "apt-get -y install ${depend}"
         done
     fi
+    echo -e "[${green}Info${plain}] Setting TimeZone to Shanghai"
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    date -s "$(curl -sI g.cn | grep Date | cut -d' ' -f3-6)Z"
+
 }
 #update_image
 update_image_v2ray(){
