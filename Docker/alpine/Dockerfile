@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install curl -y
 RUN curl -L -o /tmp/go.sh https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh
 RUN chmod +x /tmp/go.sh
-RUN /tmp/go.sh --version ${v2ray_version} --panelurl https://google.com --panelkey 55fUxDGFzH3n --nodeid 123456
+RUN /tmp/go.sh --version ${v2ray_version} --panelurl https://google.com --panelkey 55fUxDGFzH3n --nodeid 123456 --downwithpanel 1 --mysqlhost https://bing.com --mysqldbname demo_dbname --mysqluser demo_user --mysqlpasswd demo_dbpassword --mysqlport 3306 --speedtestrate 6
 
 FROM alpine:latest
 
@@ -38,4 +38,10 @@ CMD     sed -i "s|\"port\": 2333,|\"port\": ${api_port},|"  "/etc/v2ray/config.j
         sed -i "s/123456/${node_id}/g" "/etc/v2ray/config.json" && \
         sed -i "s/\"SpeedTestCheckRate\": 6/\"SpeedTestCheckRate\": ${speedtest}/g" "/etc/v2ray/config.json" && \
         sed -i "s/\"downWithPanel\": 6/\"downWithPanel\": ${downWithPanel}/g" "/etc/v2ray/config.json" && \
+        sed -i "s|"https://bing.com"|"${MYSQLHOST}"|g" "/etc/v2ray/config.json" && \
+        sed -i "s/"demo_dbname"/"${MYSQLDBNAME}"/g" "/etc/v2ray/config.json" && \
+        sed -i "s|\"demo_user\"|\"${MYSQLUSR}\"|g" "/etc/v2ray/config.json" && \
+        sed -i "s/"demo_dbpassword"/"${MYSQLPASSWD}"/g" "/etc/v2ray/config.json" && \
+        sed -i "s/3306,/${MYSQLPORT},/g" "/etc/v2ray/config.json" && \
+         sed -i "s|\"paneltype\": 0|\"paneltype\": ${PANELTYPE}|g" "/etc/v2ray/config.json" && \
         v2ray -config=/etc/v2ray/config.json
