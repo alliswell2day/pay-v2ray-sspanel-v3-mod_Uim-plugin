@@ -3,7 +3,7 @@
 ### 免费版 [请点击这里](https://github.com/rico93/v2ray-sspanel-v3-mod_Uim-plugin/)
 ## 公告
 1. 限速功能完成，是收费版本(不在提供源码，只提供二进制文件，需要联系使用[bot购买](https://t.me/Rico_V2_bot))
-2. 未来将会配合胖虎适配ssrpanel
+2. 完成胖虎SSRPANEL和sspanel mysq的适配
 3. 未来将会写自动配置tls(摆脱caddy) 咕咕
 ## Thanks
 1. 感恩的 [ColetteContreras's repo](https://github.com/ColetteContreras/v2ray-ssrpanel-plugin). 让我一个go小白有了下手地。主要起始框架来源于这里
