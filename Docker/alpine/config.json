@@ -19,6 +19,8 @@
   }
   ],
   "log": {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
     "loglevel": "info"
   },
   "outbounds": [{
@@ -101,6 +103,14 @@
     "SpeedTestCheckRate": 6,
     "panelUrl": "https://google.com",
     "panelKey": "55fUxDGFzH3n",
-    "downWithPanel": 1
+    "downWithPanel": 1,
+    "mysql": {
+      "host": "https://bing.com",
+      "port": 3306,
+      "user": "demo_user",
+      "password": "demo_dbpassword",
+      "dbname": "demo_dbname"
+    },
+    "paneltype": 0
   }
 }
