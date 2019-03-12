@@ -169,6 +169,24 @@ bash <(curl -L -s  https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3
 
 ~~~
 
+参数解释
+
+~~~
+--panelurl https://google.com  这个是webapi的请求地址
+--panelkey 55fUxDGFzH3n  这个是config.php内的mukey
+--nodeid 123456  这个是节点地址（webapi可以选择0）
+-downwithpanel 1  这个是是否面板下线的时候，节点跟着下线
+--mysqlhost https://bing.com  不说了
+--mysqldbname demo_dbname  不说了
+--mysqluser demo_user 不说了
+--mysqlpasswd demo_dbpassword  不说了
+--mysqlport 3306 不说了
+--speedtestrate 6 不说了
+--paneltype 0 0是sspanel 1是ssrpanel
+--usemysql 0 0是用webapi，1是mysql数据库连接
+
+~~~
+
 后续升级（如果要更新到最新版本）
 ~~~
 bash <(curl -L -s  https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh)
