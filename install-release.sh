@@ -85,6 +85,33 @@ while [[ $# > 0 ]];do
         --nodeid)
         NODEID="$2"
         ;;
+        --downwithpanel)
+        DOWNWITHPANEL="$2"
+        ;;
+        --mysqlhost)
+        MYSQLHOST="$2"
+        ;;
+        --mysqldbname)
+        MYSQLDBNAME="$2"
+        ;;
+        --mysqluser)
+        MYSQLUSR="$2"
+        ;;
+        --mysqlpasswd)
+        MYSQLPASSWD="$2"
+        ;;
+        --mysqlport)
+        MYSQLPORT="$2"
+        ;;
+        --speedtestrate)
+        SPEEDTESTRATE="$2"
+        ;;
+        --paneltype)
+        PANELTYPE="$2"
+        ;;
+        --usemysql)
+        USEMYSQL="$2"
+        ;;
         *)
                 # unknown option
         ;;
@@ -296,13 +323,80 @@ installV2Ray(){
             return 1
         fi
 
-        sed -i "s|"https://google.com"|"${PANELURL}"|g" "/etc/v2ray/config.json"
-        sed -i "s/"55fUxDGFzH3n"/"${PANELKEY}"/g" "/etc/v2ray/config.json"
-        sed -i "s/20,/${NODEID},/g" "/etc/v2ray/config.json"
+        if [ ! -z "${PANELURL}" ]
+        then
+              sed -i "s|"https://google.com"|"${PANELURL}"|g" "/etc/v2ray/config.json"
+              colorEcho ${BLUE} "PANELURL:${PANELURL}"
+        fi
+        if [ ! -z "${PANELKEY}" ]
+        then
+               sed -i "s/"55fUxDGFzH3n"/"${PANELKEY}"/g" "/etc/v2ray/config.json"
+               colorEcho ${BLUE} "PANELKEY:${PANELKEY}"
 
-        colorEcho ${BLUE} "PANELURL:${PANELURL}"
-        colorEcho ${BLUE} "PANELKEY:${PANELKEY}"
-        colorEcho ${BLUE} "NODEID:${NODEID}"
+        fi
+        if [ ! -z "${NODEID}" ]
+        then
+                sed -i "s/123456,/${NODEID},/g" "/etc/v2ray/config.json"
+                colorEcho ${BLUE} "NODEID:${NODEID}"
+
+        fi
+
+        if [ ! -z "${DOWNWITHPANEL}" ]
+        then
+              sed -i "s|\"downWithPanel\": 1|\"downWithPanel\": ${DOWNWITHPANEL}|g" "/etc/v2ray/config.json"
+              colorEcho ${BLUE} "DOWNWITHPANEL:${DOWNWITHPANEL}"
+        fi
+
+        if [ ! -z "${MYSQLHOST}" ]
+        then
+                sed -i "s|"https://bing.com"|"${MYSQLHOST}"|g" "/etc/v2ray/config.json"
+               colorEcho ${BLUE} "MYSQLHOST:${MYSQLHOST}"
+
+        fi
+        if [ ! -z "${MYSQLDBNAME}" ]
+        then
+                sed -i "s/"demo_dbname"/"${MYSQLDBNAME}"/g" "/etc/v2ray/config.json"
+                colorEcho ${BLUE} "MYSQLDBNAME:${MYSQLDBNAME}"
+
+        fi
+        if [ ! -z "${MYSQLUSR}" ]
+        then
+              sed -i "s|\"demo_user\"|\"${MYSQLUSR}\"|g" "/etc/v2ray/config.json"
+              colorEcho ${BLUE} "MYSQLUSR:${MYSQLUSR}"
+        fi
+        if [ ! -z "${MYSQLPASSWD}" ]
+        then
+               sed -i "s/"demo_dbpassword"/"${MYSQLPASSWD}"/g" "/etc/v2ray/config.json"
+               colorEcho ${BLUE} "MYSQLPASSWD:${MYSQLPASSWD}"
+
+        fi
+        if [ ! -z "${MYSQLPORT}" ]
+        then
+                sed -i "s/3306,/${MYSQLPORT},/g" "/etc/v2ray/config.json"
+                colorEcho ${BLUE} "MYSQLPORT:${MYSQLPORT}"
+
+        fi
+
+        if [ ! -z "${SPEEDTESTRATE}" ]
+        then
+                sed -i "s|\"SpeedTestCheckRate\": 6|\"SpeedTestCheckRate\": ${SPEEDTESTRATE}|g" "/etc/v2ray/config.json"
+                colorEcho ${BLUE} "SPEEDTESTRATE:${SPEEDTESTRATE}"
+
+        fi
+        if [ ! -z "${PANELTYPE}" ]
+        then
+                sed -i "s|\"paneltype\": 0|\"paneltype\": ${PANELTYPE}|g" "/etc/v2ray/config.json"
+                colorEcho ${BLUE} "PANELTYPE:${PANELTYPE}"
+
+        fi
+        if [ ! -z "${USEMYSQL}" ]
+        then
+                sed -i "s|\"usemysql\": 0|\"usemysql\": ${USEMYSQL}|g" "/etc/v2ray/config.json"
+                colorEcho ${BLUE} "USEMYSQL:${USEMYSQL}"
+
+        fi
+
+
     fi
     return 0
 }
