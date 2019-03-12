@@ -185,8 +185,8 @@ pre_install_docker_compose(){
     echo
     # Set Setting if the node go downwith panel
     echo "Setting MysqlPort if you don't want, just pass"
-    read -p "(v2ray_mysqlport (Default 3360):" v2ray_mysqlport
-    [ -z "${v2ray_mysqlport}" ] && v2ray_mysqlport=1
+    read -p "(v2ray_mysqlport (Default 3306):" v2ray_mysqlport
+    [ -z "${v2ray_mysqlport}" ] && v2ray_mysqlport=3306
     echo
     echo "---------------------------"
     echo "v2ray_mysqlport = ${v2ray_mysqlport}"
