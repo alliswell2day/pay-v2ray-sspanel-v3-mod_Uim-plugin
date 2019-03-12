@@ -136,11 +136,8 @@ pre_install_docker_compose(){
     echo "---------------------------"
     echo
 
-    if (( ${v2ray_usemysql} == 0 ));
-    then
-      echo "No results for ${1}"
       # Set ssrpanel_url
-    echo "Please sspanel_url"
+    echo "Please sspanel_url, u can pass this setting u chosen use mysql"
     read -p "(There is no default value please make sure you input the right thing):" ssrpanel_url
     [ -z "${ssrpanel_url}" ]
     echo
@@ -149,7 +146,7 @@ pre_install_docker_compose(){
     echo "---------------------------"
     echo
     # Set ssrpanel key
-    echo "sspanel key"
+    echo "sspanel key  u can pass this setting u chosen use mysql"
     read -p "(There is no default value please make sure you input the right thing):" ssrpanel_key
     [ -z "${ssrpanel_key}" ]
     echo
@@ -157,9 +154,8 @@ pre_install_docker_compose(){
     echo "ssrpanel_key = ${ssrpanel_key}"
     echo "---------------------------"
     echo
-    else
    # Set Setting if the node go downwith panel
-    echo "Setting Myqlhost, if you dont want, just pass"
+    echo "Setting Myqlhost,  u can pass this setting u chosen use webapi"
     read -p "(v2ray_downWithPanel :" v2ray_mysqlhost
     [ -z "${v2ray_mysqlhost}" ] && v2ray_mysqlhost=""
     echo
@@ -168,7 +164,7 @@ pre_install_docker_compose(){
     echo "---------------------------"
     echo
     # Set Setting if the node go downwith panel
-    echo "Setting MysqlPort if you don't want, just pass"
+    echo "Setting MysqlPort u can pass this setting u chosen use webapi"
     read -p "(v2ray_mysqlport (Default 3306):" v2ray_mysqlport
     [ -z "${v2ray_mysqlport}" ] && v2ray_mysqlport=3306
     echo
@@ -177,7 +173,7 @@ pre_install_docker_compose(){
     echo "---------------------------"
     echo
     # Set Setting if the node go downwith panel
-    echo "Setting MysqlUser if you don't want, just pass"
+    echo "Setting MysqlUser u can pass this setting u chosen use webapi"
     read -p "(v2ray_myqluser (Default root):" v2ray_myqluser
     [ -z "${v2ray_myqluser}" ] && v2ray_myqluser="root"
     echo
@@ -186,7 +182,7 @@ pre_install_docker_compose(){
     echo "---------------------------"
     echo
     # Set Setting if the node go downwith panel
-    echo "Setting MysqlPassword if you don't want, just pass"
+    echo "Setting MysqlPassword u can pass this setting u chosen use webapi"
     read -p "(v2ray_mysqlpassword (Default 1):" v2ray_mysqlpassword
     [ -z "${v2ray_mysqlpassword}" ] && v2ray_mysqlpassword=1
     echo
@@ -195,7 +191,7 @@ pre_install_docker_compose(){
     echo "---------------------------"
     echo
     # Set Setting if the node go downwith panel
-    echo "Setting MysqlDbname if you don't want, just pass"
+    echo "Setting MysqlDbname u can pass this setting u chosen use webapi"
     read -p "(v2ray_mysqldbname (Default 1):" v2ray_mysqldbname
     [ -z "${v2ray_mysqldbname}" ] && v2ray_mysqldbname=1
     echo
@@ -203,7 +199,6 @@ pre_install_docker_compose(){
     echo "v2ray_mysqldbname = ${v2ray_mysqldbname}"
     echo "---------------------------"
     echo
-    fi
 
 
     # Set ssrpanel speedtest function
