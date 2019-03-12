@@ -111,6 +111,7 @@
       "password": "demo_dbpassword",
       "dbname": "demo_dbname"
     },
-    "paneltype": 0
+    "paneltype": 0,
+    "usemysql": 0
   }
 }

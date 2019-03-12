@@ -116,7 +116,30 @@ pre_install_docker_compose(){
     echo "v2ray_paneltype = ${v2ray_paneltype}"
     echo "---------------------------"
     echo
-    # Set ssrpanel_url
+    # Set ssrpanel node_id
+    echo "sspanel node_id"
+    read -p "(Default value: 0 ):" ssrpanel_node_id
+    [ -z "${ssrpanel_node_id}" ] && ssrpanel_node_id=0
+    echo
+    echo "---------------------------"
+    echo "ssrpanel_node_id = ${ssrpanel_node_id}"
+    echo "---------------------------"
+    echo
+
+
+    echo "Which connection do you prefer 0 for webapi 1 for mysql"
+    read -p "(v2ray_usemysql (Default 0):" v2ray_usemysql
+    [ -z "${v2ray_usemysql}" ] && v2ray_usemysql=0
+    echo
+    echo "---------------------------"
+    echo "v2ray_usemysql = ${v2ray_usemysql}"
+    echo "---------------------------"
+    echo
+
+    if (( ${v2ray_usemysql} == 0 ));
+    then
+      echo "No results for ${1}"
+      # Set ssrpanel_url
     echo "Please sspanel_url"
     read -p "(There is no default value please make sure you input the right thing):" ssrpanel_url
     [ -z "${ssrpanel_url}" ]
@@ -134,47 +157,8 @@ pre_install_docker_compose(){
     echo "ssrpanel_key = ${ssrpanel_key}"
     echo "---------------------------"
     echo
-
-    # Set ssrpanel speedtest function
-    echo "use sspanel speedtest"
-    read -p "(sspanel speedtest: Default (6) hours every time):" ssrpanel_speedtest
-    [ -z "${ssrpanel_speedtest}" ] && ssrpanel_speedtest=6
-    echo
-    echo "---------------------------"
-    echo "ssrpanel_speedtest = ${ssrpanel_speedtest}"
-    echo "---------------------------"
-    echo
-
-    # Set ssrpanel node_id
-    echo "sspanel node_id"
-    read -p "(Default value: 0 ):" ssrpanel_node_id
-    [ -z "${ssrpanel_node_id}" ] && ssrpanel_node_id=0
-    echo
-    echo "---------------------------"
-    echo "ssrpanel_node_id = ${ssrpanel_node_id}"
-    echo "---------------------------"
-    echo
-
-    # Set V2ray backend API Listen port
-    echo "Setting V2ray backend API Listen port"
-    read -p "(V2ray API Listen port(Default 2333):" v2ray_api_port
-    [ -z "${v2ray_api_port}" ] && v2ray_api_port=2333
-    echo
-    echo "---------------------------"
-    echo "V2ray API Listen port = ${v2ray_api_port}"
-    echo "---------------------------"
-    echo
-
-    # Set Setting if the node go downwith panel
-    echo "Setting if the node go downwith panel"
-    read -p "(v2ray_downWithPanel (Default 1):" v2ray_downWithPanel
-    [ -z "${v2ray_downWithPanel}" ] && v2ray_downWithPanel=1
-    echo
-    echo "---------------------------"
-    echo "v2ray_downWithPanel = ${v2ray_downWithPanel}"
-    echo "---------------------------"
-    echo
-    # Set Setting if the node go downwith panel
+    else
+   # Set Setting if the node go downwith panel
     echo "Setting Myqlhost, if you dont want, just pass"
     read -p "(v2ray_downWithPanel :" v2ray_mysqlhost
     [ -z "${v2ray_mysqlhost}" ] && v2ray_mysqlhost=""
@@ -219,6 +203,39 @@ pre_install_docker_compose(){
     echo "v2ray_mysqldbname = ${v2ray_mysqldbname}"
     echo "---------------------------"
     echo
+    fi
+
+
+    # Set ssrpanel speedtest function
+    echo "use sspanel speedtest"
+    read -p "(sspanel speedtest: Default (6) hours every time):" ssrpanel_speedtest
+    [ -z "${ssrpanel_speedtest}" ] && ssrpanel_speedtest=6
+    echo
+    echo "---------------------------"
+    echo "ssrpanel_speedtest = ${ssrpanel_speedtest}"
+    echo "---------------------------"
+    echo
+
+    # Set V2ray backend API Listen port
+    echo "Setting V2ray Grpc API Listen port"
+    read -p "(V2ray Grpc API Listen port(Default 2333):" v2ray_api_port
+    [ -z "${v2ray_api_port}" ] && v2ray_api_port=2333
+    echo
+    echo "---------------------------"
+    echo "V2ray Grpc API Listen port = ${v2ray_api_port}"
+    echo "---------------------------"
+    echo
+
+    # Set Setting if the node go downwith panel
+    echo "Setting if the node go downwith panel"
+    read -p "(v2ray_downWithPanel (Default 1):" v2ray_downWithPanel
+    [ -z "${v2ray_downWithPanel}" ] && v2ray_downWithPanel=1
+    echo
+    echo "---------------------------"
+    echo "v2ray_downWithPanel = ${v2ray_downWithPanel}"
+    echo "---------------------------"
+    echo
+
     # Set Setting if the node go downwith panel
 
 }
@@ -294,6 +311,7 @@ config_docker(){
     sed -i "s|speedtest:.*|speedtest: ${ssrpanel_speedtest}|"  ./docker-compose.yml
     sed -i "s|api_port:.*|api_port: ${v2ray_api_port}|" ./docker-compose.yml
     sed -i "s|downWithPanel:.*|downWithPanel: ${v2ray_downWithPanel}|" ./docker-compose.yml
+    sed -i "s|usemysql:.*|usemysql: ${v2ray_usemysql}|" ./docker-compose.yml
     sed -i "s|PANELTYPE:.*|PANELTYPE: ${v2ray_paneltype}|" ./docker-compose.yml
     sed -i "s|MYSQLHOST:.*|MYSQLHOST: ${v2ray_mysqlhost}|" ./docker-compose.yml
     sed -i "s|MYSQLPORT:.*|MYSQLPORT: ${v2ray_mysqlport}|" ./docker-compose.yml
@@ -319,6 +337,7 @@ config_caddy_docker(){
     sed -i "s|speedtest:.*|speedtest: ${ssrpanel_speedtest}|"  ./docker-compose.yml
     sed -i "s|api_port:.*|api_port: ${v2ray_api_port}|" ./docker-compose.yml
     sed -i "s|downWithPanel:.*|downWithPanel: ${v2ray_downWithPanel}|" ./docker-compose.yml
+    sed -i "s|usemysql:.*|usemysql: ${v2ray_usemysql}|" ./docker-compose.yml
     sed -i "s|PANELTYPE:.*|PANELTYPE: ${v2ray_paneltype}|" ./docker-compose.yml
     sed -i "s|MYSQLHOST:.*|MYSQLHOST: ${v2ray_mysqlhost}|" ./docker-compose.yml
     sed -i "s|MYSQLPORT:.*|MYSQLPORT: ${v2ray_mysqlport}|" ./docker-compose.yml
@@ -371,6 +390,7 @@ config_caddy_docker_cloudflare(){
     sed -i "s|speedtest:.*|speedtest: ${ssrpanel_speedtest}|"  ./docker-compose.yml
     sed -i "s|api_port:.*|api_port: ${v2ray_api_port}|" ./docker-compose.yml
     sed -i "s|downWithPanel:.*|downWithPanel: ${v2ray_downWithPanel}|" ./docker-compose.yml
+    sed -i "s|usemysql:.*|usemysql: ${v2ray_usemysql}|" ./docker-compose.yml
     sed -i "s|PANELTYPE:.*|PANELTYPE: ${v2ray_paneltype}|" ./docker-compose.yml
     sed -i "s|MYSQLHOST:.*|MYSQLHOST: ${v2ray_mysqlhost}|" ./docker-compose.yml
     sed -i "s|MYSQLPORT:.*|MYSQLPORT: ${v2ray_mysqlport}|" ./docker-compose.yml

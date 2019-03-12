@@ -109,6 +109,9 @@ while [[ $# > 0 ]];do
         --paneltype)
         PANELTYPE="$2"
         ;;
+        --usemysql)
+        USEMYSQL="$2"
+        ;;
         *)
                 # unknown option
         ;;
@@ -386,6 +389,13 @@ installV2Ray(){
                 colorEcho ${BLUE} "PANELTYPE:${PANELTYPE}"
 
         fi
+        if [ ! -z "${USEMYSQL}" ]
+        then
+                sed -i "s|\"usemysql\": 0|\"usemysql\": ${USEMYSQL}|g" "/etc/v2ray/config.json"
+                colorEcho ${BLUE} "USEMYSQL:${USEMYSQL}"
+
+        fi
+
 
     fi
     return 0

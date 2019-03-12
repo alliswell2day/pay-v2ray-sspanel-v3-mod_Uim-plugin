@@ -19,6 +19,7 @@ services:
       MYSQLPASSWD: "demo_dbpassword"
       MYSQLPORT: 3306
       PANELTYPE: 0
+      usemysql: 0
     volumes:
       - /etc/localtime:/etc/localtime:ro
     logging:

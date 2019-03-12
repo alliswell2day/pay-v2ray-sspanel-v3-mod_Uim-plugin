@@ -160,9 +160,12 @@ bash install.sh
 修改了官方安装脚本
 用脚本指定面板信息，请务必删除原有的config.json, 否则不会更新config.json
 
-安装（这里保持最新版本） 安装时请务必修改 脚本参数，按照你自己的来, paneltyp 0是sspanel， 1是ssrpanel
+安装（这里保持最新版本） 安装时请务必修改 脚本参数，按照你自己的来, paneltyp 0是sspanel， 1是ssrpanel , usemysql选择对接方式 0 webapi 1 mysql（ssrpanel 必须是1）
 ~~~
-bash <(curl -L -s  https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh) --panelurl https://google.com --panelkey 55fUxDGFzH3n --nodeid 123456 --downwithpanel 1 --mysqlhost https://bing.com --mysqldbname demo_dbname --mysqluser demo_user --mysqlpasswd demo_dbpassword --mysqlport 3306 --speedtestrate 6 --paneltype 0
+bash <(curl -L -s  https://raw.githubusercontent.com/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/master/install-release.sh) \
+--panelurl https://google.com --panelkey 55fUxDGFzH3n --nodeid 123456 --downwithpanel 1 \
+--mysqlhost https://bing.com --mysqldbname demo_dbname --mysqluser demo_user --mysqlpasswd demo_dbpassword --mysqlport 3306 \
+--speedtestrate 6 --paneltype 0 --usemysql 0
 
 ~~~
 
