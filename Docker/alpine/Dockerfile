@@ -2,7 +2,7 @@ FROM ubuntu:latest as builder
 
 LABEL maintainer="Rico <rico93@outlook.com>"
 
-ENV v2ray_version=4.18.1
+ENV v2ray_version=4.18.2
 
 RUN apt-get update
 RUN apt-get install curl -y
@@ -44,5 +44,5 @@ CMD     sed -i "s|\"port\": 2333,|\"port\": ${api_port},|"  "/etc/v2ray/config.j
         sed -i "s/"demo_dbpassword"/"${MYSQLPASSWD}"/g" "/etc/v2ray/config.json" && \
         sed -i "s/3306,/${MYSQLPORT},/g" "/etc/v2ray/config.json" && \
         sed -i "s|\"paneltype\": 0|\"paneltype\": ${PANELTYPE}|g" "/etc/v2ray/config.json" && \
-        sed -i "s|\"usemysql\": 0|\"usemsql\": ${usemysql}|g" "/etc/v2ray/config.json" && \
+        sed -i "s|\"usemysql\": 0|\"usemysql\": ${usemysql}|g" "/etc/v2ray/config.json" && \
         v2ray -config=/etc/v2ray/config.json
