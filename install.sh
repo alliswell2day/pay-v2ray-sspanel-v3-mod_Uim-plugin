@@ -416,6 +416,7 @@ install_docker(){
     echo "Start Docker "
     service docker start
     echo "Start Docker-Compose "
+    docker-compose pull
     docker-compose up -d
     echo
     echo -e "Congratulations, V2ray server install completed!"
@@ -534,6 +535,7 @@ update_config_v2ray(){
     esac
 
     echo "Start Service"
+    docker-compose pull
     docker-compose up -d
 
 }
