@@ -473,6 +473,7 @@ install_dependencies(){
 
         yum_depends=(
              curl
+             socat
         )
         for depend in ${yum_depends[@]}; do
             error_detect_depends "yum -y install ${depend}"
@@ -480,6 +481,7 @@ install_dependencies(){
     elif check_sys packageManager apt; then
         apt_depends=(
            curl
+           socat
         )
         apt-get -y update
         for depend in ${apt_depends[@]}; do
@@ -489,7 +491,8 @@ install_dependencies(){
     echo -e "[${green}Info${plain}] Setting TimeZone to Shanghai"
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
     date -s "$(curl -sI g.cn | grep Date | cut -d' ' -f3-6)Z"
-
+    echo -e "[${green}Info${plain}] Downloading acme.sh"
+    curl https://get.acme.sh | sh
 }
 #update_image
 update_image_v2ray(){
