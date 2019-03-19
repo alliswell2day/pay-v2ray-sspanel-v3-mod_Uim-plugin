@@ -19,17 +19,23 @@ COPY --from=builder /usr/bin/v2ray/geosite.dat /usr/bin/v2ray/
 COPY config.json  /etc/v2ray/config.json
 
 RUN set -ex && \
-    apk --no-cache add ca-certificates && \
+    apk --no-cache add ca-certificates socat openssl coreutils bind-tools curl socat tzdata \ && \
     update-ca-certificates && \
     apk add --update tzdata && \
     mkdir /var/log/v2ray/ && \
     chmod +x /usr/bin/v2ray/v2ctl && \
     chmod +x /usr/bin/v2ray/v2ray && \
     rm -rf /var/cache/apk/*
+#Install
+ADD ./ /install_acme.sh/
+RUN cd /install_acme.sh && ([ -f /install_acme.sh/acme.sh ] && /install_acme.sh/acme.sh --install || curl https://get.acme.sh | sh) && rm -rf /install_acme.sh/
+
+
+RUN ln -s  /root/.acme.sh/acme.sh  /usr/local/bin/acme.sh && crontab -l | grep acme.sh | sed 's#> /dev/null##' | crontab -
 
 ENV TZ=Asia/Shanghai
 ENV PATH /usr/bin/v2ray:$PATH
-VOLUME  /var/log/v2ray/
+VOLUME  /var/log/v2ray/ /root/.acme.sh/
 WORKDIR /var/log/v2ray/
 
 CMD     sed -i "s|\"port\": 2333,|\"port\": ${api_port},|"  "/etc/v2ray/config.json" &&\

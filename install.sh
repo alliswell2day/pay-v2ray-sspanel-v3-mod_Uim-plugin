@@ -416,6 +416,7 @@ install_docker(){
     echo "Start Docker "
     service docker start
     echo "Start Docker-Compose "
+    docker-compose pull
     docker-compose up -d
     echo
     echo -e "Congratulations, V2ray server install completed!"
@@ -488,7 +489,6 @@ install_dependencies(){
     echo -e "[${green}Info${plain}] Setting TimeZone to Shanghai"
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
     date -s "$(curl -sI g.cn | grep Date | cut -d' ' -f3-6)Z"
-
 }
 #update_image
 update_image_v2ray(){
@@ -534,6 +534,7 @@ update_config_v2ray(){
     esac
 
     echo "Start Service"
+    docker-compose pull
     docker-compose up -d
 
 }

@@ -508,6 +508,9 @@ main(){
         colorEcho ${YELLOW} "Installing V2Ray via local file. Please make sure the file is a valid V2Ray package, as we are not able to determine that."
         NEW_VER=local
         installSoftware unzip || return $?
+        installSoftware "socat" || return $?
+        colorEcho  ${YELLOW} "Downloading acme.sh"
+        curl https://get.acme.sh | sh
         rm -rf /tmp/v2ray
         extract $LOCAL || return $?
         #FILEVDIS=`ls /tmp/v2ray |grep v2ray-v |cut -d "-" -f4`
@@ -524,6 +527,9 @@ main(){
     else
         # download via network and extract
         installSoftware "curl" || return $?
+        installSoftware "socat" || return $?
+        colorEcho  ${YELLOW} "Downloading acme.sh"
+        curl https://get.acme.sh | sh
         getVersion
         RETVAL="$?"
         if [[ $RETVAL == 0 ]] && [[ "$FORCE" != "1" ]]; then
